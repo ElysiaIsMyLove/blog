@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<string.h>
 #define length 100
@@ -51,3 +50,4 @@ int main()
     return 0;
 
 }
+
