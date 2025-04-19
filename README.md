@@ -1,26 +1,53 @@
-#include <stdio.h>
-
-int main() {
-    printf("请输入有多少数字（不超过五个）：");
-    int k = 0;
-    scanf_s("%d", &k); // 注意这里应该传入 k 的地址
-
-    if (k > 5 || k <= 0) { // 检查输入是否符合要求
-        printf("输入的数量必须大于0且不超过五个。\n");
-        return 1; // 返回错误代码
+穿插显示字母
+#include<stdio.h>
+#include<string.h>
+#define length 100
+char* mergeAlternately(char* word1, char* word2) {
+    static char result[length * 2+1];
+    int len1 = strlen(word1);
+    int len2 = strlen(word2);
+    int i = 0, j = 0, k = 0;
+    const int max_k = 2 * length;
+    while (i < len1 && j < len2 && k<max_k)
+    {
+        result[k++] = word1[i++];
+        if (k < max_k)
+        {
+            result[k++] = word2[j++];
+       }
     }
-
-    printf("请输入 %d 个数字：", k);
-    int num[5];
-    for (int i = 0; i < k; i++) {
-        scanf_s("%d", &num[i]); // 需要传入每个元素的地址
+    while (i < len1 && k<max_k)
+    {
+        result[k++] = word1[i++];
     }
-
-    printf("逆序输出为：");
-    for (int j = k - 1; j >= 0; j--) { // 修正循环边界
-        printf("%d ", num[j]); // 添加空格使输出更清晰
+    while (j < len2 && k<max_k)
+    {
+        result[k++] = word2[j++];
     }
-    printf("\n"); // 结束后换行
+    result[k] = '\0';
+    return result;
 
+}
+int main()
+{
+    char word1[length];
+    char word2[length];
+    printf("请输入word1的数值，大小在1到%d之间", length);
+    scanf("%99s", word1);
+    if (strlen(word1) == 0)
+    {
+        printf("错误");
+        return 1;
+    }
+    printf("请输入word2的值，大小在1到%d之间", length);
+    scanf("%99s", word2);
+    if (strlen(word2) == 0)
+    {
+        printf("错误");
+        return 1;
+    }
+    char* merged = mergeAlternately(word1, word2);
+    printf("合并后的字符为：%s\n", merged);
     return 0;
+
 }
