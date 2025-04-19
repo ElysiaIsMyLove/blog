@@ -1,4 +1,4 @@
-穿插显示字母
+
 #include<stdio.h>
 #include<string.h>
 #define length 100
